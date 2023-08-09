@@ -1,14 +1,20 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.Scanner;
 
 public class ToDoList {
 
+  //private static File listTask = new File("res/list.csv");
+
   private String name;
-  private final LocalDate createdDate;
-  private Date finalDate;
+  private LocalDate createdDate;
+  private LocalDate finalDate;
   private boolean complete;
 
-  public ToDoList(String name, Date finalDate) {
+  public ToDoList(String name, LocalDate finalDate) {
     this.name = name;
     this.finalDate = finalDate;
     this.createdDate = LocalDate.now();
@@ -23,7 +29,7 @@ public class ToDoList {
     return createdDate;
   }
 
-  public Date getFinalDate() {
+  public LocalDate getFinalDate() {
     return finalDate;
   }
 
@@ -35,11 +41,46 @@ public class ToDoList {
     this.name = newName;
   }
 
-  public void setFinalDate(Date newFinalDate) {
+  public void setFinalDate(LocalDate newFinalDate) {
     this.finalDate = newFinalDate;
   }
 
   public void setComplete(boolean complete) {
     this.complete = complete;
+  }
+
+  public static void addNewTask()
+      throws FileNotFoundException, UnsupportedEncodingException {
+    ToDoList toDoList = new ToDoList("test", LocalDate.now());
+    ToDoList toDoList1 = new ToDoList("test23", LocalDate.now());
+    PrintWriter writer = new PrintWriter("res/list.csv", "UTF-8");
+    writer.println(toDoList.toString());
+    //   writer.println(toDoList1.toString());
+    writer.close();
+  }
+
+  public static void readTask() {
+
+    File inputFile = new File("res/list.csv");
+    Scanner scanner;
+    try {
+      scanner = new Scanner(inputFile);
+
+    } catch (FileNotFoundException e) {
+      System.err.println(e.getMessage());
+
+      return;
+    }
+    System.out.println(scanner);
+  }
+
+  @Override
+  public String toString() {
+    return
+        "name='" + name + '\'' +
+            ", createdDate=" + createdDate +
+            ", finalDate=" + finalDate +
+            ", complete=" + complete +
+            '}';
   }
 }
