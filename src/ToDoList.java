@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class ToDoList {
 
-  //private static File listTask = new File("res/list.csv");
 
   private String name;
   private LocalDate createdDate;
@@ -15,6 +14,12 @@ public class ToDoList {
   private boolean complete;
 
   public ToDoList(String name, LocalDate finalDate) {
+    if(name == null || name.isEmpty()) {
+      throw new IllegalArgumentException("NO CORRECT" + name);
+    }
+    if (finalDate == null || finalDate.isBefore(LocalDate.now())) {
+      throw new IllegalArgumentException("NO CORRECT");
+    }
     this.name = name;
     this.finalDate = finalDate;
     this.createdDate = LocalDate.now();
@@ -54,9 +59,39 @@ public class ToDoList {
     ToDoList toDoList = new ToDoList("test", LocalDate.now());
     ToDoList toDoList1 = new ToDoList("test23", LocalDate.now());
     PrintWriter writer = new PrintWriter("res/list.csv", "UTF-8");
-    writer.println(toDoList.toString());
-    //   writer.println(toDoList1.toString());
+    writer.println(toDoList);
     writer.close();
+  }
+
+  public static void addNewTaskToFile() {
+    ToDoList toDoList = new ToDoList("test", LocalDate.now());
+    try (PrintWriter writer = new PrintWriter("res/list.csv", "UTF-8")) {
+      writer.println(toDoList.toString());
+    } catch (FileNotFoundException e) {
+      System.out.println("Файл не найден: " + e.getMessage());
+      throw new RuntimeException(e);
+    } catch (UnsupportedEncodingException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+
+  public static void readTaskFromFile() {
+    File inputFile = new File("res/list.csv");
+    Scanner scanner;
+    try {
+      scanner = new Scanner(inputFile);
+      while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        // в зависимости от структуры нашего файла - пишем здесь проверку
+        //для введенной строки или делим ее сабстрингом(задаем сепаратор и парсим дату)
+
+        System.out.println(line);
+      }
+      scanner.close();
+    } catch (FileNotFoundException e) {
+      System.err.println(e.getMessage());
+    }
   }
 
   public static void readTask() {
