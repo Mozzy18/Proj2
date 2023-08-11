@@ -88,9 +88,7 @@ public class Task implements Comparable<Task> {
     return
         "name='" + name + '\'' +
             ", createdDate=" + createdDate +
-            ", finalDate=" + finalDate +
-            ", complete=" + complete +
-            '}';
+            ", finalDate=" + finalDate;
   }
 
   @Override
