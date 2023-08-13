@@ -33,13 +33,15 @@ public class ToDoList {
   public static void sortTask() {
     setArrList();
     Collections.sort(allTasks);
-         for (Task task : allTasks) {
-           if (Boolean.valueOf(task.isComplete())) {
-             System.out.println(ANSI_GREEN + task.getName() + " до " + task.getFinalDate() + ANSI_RESET);
-           } else
-             System.out.println(task.getName() + " до " + task.getFinalDate());
+    for (Task task : allTasks) {
+      if (Boolean.valueOf(task.isComplete())) {
+        System.out.println(ANSI_GREEN + task.getName() + " до " + task.getFinalDate() + ANSI_RESET);
+      } else {
+        System.out.println(task.getName() + " до " + task.getFinalDate());
+      }
     }
   }
+
   public static void listFinalTask() {
     setArrList();
 
@@ -56,10 +58,10 @@ public class ToDoList {
     for (Task task : finalAllTasks) {
       System.out.println(ANSI_GREEN + task.getName() + " до " + task.getFinalDate() + ANSI_RESET);
 
-      }
+    }
     System.out.println("\nСписок не выполненных задач:");
     for (Task task : noFinalAllTask) {
-        System.out.println(task.getName() + " до " + task.getFinalDate());
+      System.out.println(task.getName() + " до " + task.getFinalDate());
     }
   }
 
@@ -68,11 +70,14 @@ public class ToDoList {
     System.out.println("Введите имя задачи");
     String name = scanner.nextLine();
     for (Task task : allTasks) {
-      if(task.getName().equals(name)){
+      if (task.getName().equals(name)) {
         System.out.println("Введите: 1(Завершенная) 2(В прогрессе)");
         int status = Integer.parseInt(scanner.nextLine());
-        if(status == 1)task.setComplete(true);
-        else task.setComplete(false);
+        if (status == 1) {
+          task.setComplete(true);
+        } else {
+          task.setComplete(false);
+        }
         addTaskToFile();
       }
     }
@@ -123,11 +128,20 @@ public class ToDoList {
     setArrList();
     System.out.println("Введите имя новой задачи");
     String name = scanner.nextLine().toLowerCase();
+    if (name.isEmpty()) {
+      System.out.println("Имя задачи не может быть пустым");
+      return;
+    }
     System.out.println("Введите дату окончания в формате 'yyyy.mm.dd'");
-    Scanner scanner1 = new Scanner(System.in);
-    String date = scanner1.nextLine();
-    String[] finaleDate = date.split("\\.");
-    if (finaleDate.length > 1) {
+    String date = scanner.nextLine();
+    if (date.isEmpty()) {
+      System.out.println("Дата окончания не может быть пустой");
+      return;
+    }
+    try {
+      String[] finaleDate = date.split("\\.");
+      if (finaleDate.length > 1) {
+      }
       int year = Integer.parseInt(finaleDate[0]);
       int month = Integer.parseInt(finaleDate[1]);
       int day = Integer.parseInt(finaleDate[2]);
@@ -135,6 +149,10 @@ public class ToDoList {
       System.out.println(newTask.toString());
       allTasks.add(newTask);
       addTaskToFile();
+    } catch (NumberFormatException e) {
+      System.out.println(e.getMessage());
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
     }
   }
 
@@ -145,8 +163,9 @@ public class ToDoList {
     for (Task task : allTasks) {
       if (Boolean.valueOf(task.isComplete())) {
         System.out.println(ANSI_GREEN + task.getName() + " до " + task.getFinalDate() + ANSI_RESET);
-      } else
+      } else {
         System.out.println(task.getName() + " до " + task.getFinalDate());
+      }
 
     }
   }

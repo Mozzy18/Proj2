@@ -33,7 +33,7 @@ public enum MenuCommand {
     System.out.println("3. Изменить имя задачи и дату выполнения");
     System.out.println("4. Изменить статус задачи");
     System.out.println("5. Посмотреть список задач");
-    System.out.println("6. Сортировать список задач");
+    System.out.println("6. Сортировать список задач по датам реализации");
     System.out.println("7. Сортировать задачи на выполненные и нет");
     System.out.println("0. Выход");
   }

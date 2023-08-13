@@ -8,12 +8,12 @@ public class Task implements Comparable<Task> {
   private boolean complete;
 
   public Task(String name, LocalDate finalDate, Boolean complete) {
-    if (name == null || name.isEmpty()) {
-      throw new IllegalArgumentException("NO CORRECT" + name);
-    }
-    if (finalDate == null || finalDate.isBefore(LocalDate.now())) {
-      throw new IllegalArgumentException("NO CORRECT");
-    }
+   if (name == null || name.isEmpty()) {
+     throw new IllegalArgumentException("NO CORRECT" + name);
+   }
+   if (finalDate == null || finalDate.isBefore(LocalDate.now())) {
+     throw new IllegalArgumentException("NO CORRECT");
+   }
     this.name = name;
     this.finalDate = finalDate;
     this.createdDate = LocalDate.now();
