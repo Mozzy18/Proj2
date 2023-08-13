@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.Scanner;
 
 public enum MenuCommand {
@@ -7,6 +8,8 @@ public enum MenuCommand {
   CHANGE("Изменить имя задачи и дату выполнения"),
   COMPLETE("Изменить статус задачи"),
   READ("Посмотреть список задач"),
+  SORT("Сортировать список задач по датам реализации"),
+  COMPLETED("Сортировать задачи на выполненные и нет"),
   UNEXPECTED("");
 
 
@@ -31,6 +34,8 @@ public enum MenuCommand {
     System.out.println("3. Изменить имя задачи и дату выполнения");
     System.out.println("4. Изменить статус задачи");
     System.out.println("5. Посмотреть список задач");
+    System.out.println("6. Сортировать список задач");
+    System.out.println("7. Сортировать задачи на выполненные и нет");
     System.out.println("0. Выход");
   }
 
@@ -49,38 +54,46 @@ public enum MenuCommand {
 
         switch (command) {
           case 1:
-            System.out.println("Вы выбрали: ");
-            System.out.println("добавить новое задание в список");
+            System.out.println("Вы выбрали: " + ADD.s);
             ToDoList.createTask();
             selectedCommand = ADD;
             break;
 
           case 2:
-            System.out.println("Вы выбрали: ");
-            System.out.println("удалить задачу из списка");
+            System.out.println("Вы выбрали: " + DELETE.s);
             ToDoList.deleteTask();
             selectedCommand = DELETE;
             break;
 
           case 3:
-            System.out.println("Вы выбрали: ");
-            System.out.println("изменить имя задачи и дату выполнения");
+            System.out.println("Вы выбрали: " + CHANGE.s);
             ToDoList.changeTask();
             selectedCommand = CHANGE;
             break;
 
           case 4:
-            System.out.println("Вы выбрали: ");
-            System.out.println("изменить статус задачи");
+            System.out.println("Вы выбрали: " + COMPLETE.s);
             ToDoList.taskIsComplete();
             selectedCommand = COMPLETE;
             break;
 
           case 5:
-            System.out.println("Вы выбрали: ");
-            System.out.println("Посмотреть список задач");
+            System.out.println("Вы выбрали: " + READ.s);
+
             ToDoList.readTaskFromFile();
             selectedCommand = READ;
+            break;
+
+          case 6:
+            System.out.println("Вы выбрали: " + SORT.s);
+            ToDoList.sortTask();
+            selectedCommand = SORT;
+            break;
+
+          case 7:
+            System.out.println("Вы выбрали: " + COMPLETED.s);
+            ToDoList.listFinalTask();
+            selectedCommand = COMPLETED;
             break;
 
           case 0:
@@ -94,6 +107,7 @@ public enum MenuCommand {
             break;
 
         }
+
       } else {
         System.err.println("Некорректный выбор. Попробуйте снова.\n");
         scanner.nextLine();

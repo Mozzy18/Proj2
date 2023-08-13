@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,6 +27,39 @@ public class ToDoList {
         System.out.println(task);
         addTaskToFile();
       }
+    }
+  }
+
+  public static void sortTask() {
+    setArrList();
+    Collections.sort(allTasks);
+         for (Task task : allTasks) {
+           if (Boolean.valueOf(task.isComplete())) {
+             System.out.println(ANSI_GREEN + task.getName() + " до " + task.getFinalDate() + ANSI_RESET);
+           } else
+             System.out.println(task.getName() + " до " + task.getFinalDate());
+    }
+  }
+  public static void listFinalTask() {
+    setArrList();
+
+    List<Task> finalAllTasks = new ArrayList<>();
+    List<Task> noFinalAllTask = new ArrayList<>();
+    for (Task task : allTasks) {
+      if (Boolean.valueOf(task.isComplete())) {
+        finalAllTasks.add(task);
+      } else {
+        noFinalAllTask.add(task);
+      }
+    }
+    System.out.println("Список выполненных задач:");
+    for (Task task : finalAllTasks) {
+      System.out.println(ANSI_GREEN + task.getName() + " до " + task.getFinalDate() + ANSI_RESET);
+
+      }
+    System.out.println("\nСписок не выполненных задач:");
+    for (Task task : noFinalAllTask) {
+        System.out.println(task.getName() + " до " + task.getFinalDate());
     }
   }
 
@@ -73,8 +107,8 @@ public class ToDoList {
           int month = Integer.parseInt(finaleDate[1]);
           int day = Integer.parseInt(finaleDate[2]);
           LocalDate localDate = LocalDate.of(year, month, day);
-          Boolean comlete = Boolean.valueOf(data[3]);
-          Task task = new Task(name, localDate, comlete);
+          Boolean complete = Boolean.valueOf(data[3]);
+          Task task = new Task(name, localDate, complete);
           allTasks.add(task);
         }
       }
@@ -89,7 +123,7 @@ public class ToDoList {
     setArrList();
     System.out.println("Введите имя новой задачи");
     String name = scanner.nextLine().toLowerCase();
-    System.out.println("Введите дату оканчания в формате 'yyyy.mm.dd'");
+    System.out.println("Введите дату окончания в формате 'yyyy.mm.dd'");
     Scanner scanner1 = new Scanner(System.in);
     String date = scanner1.nextLine();
     String[] finaleDate = date.split("\\.");
@@ -123,10 +157,10 @@ public class ToDoList {
     String name = scanner.nextLine().toLowerCase();
     for (Task task : allTasks) {
       if (task.getName().equals(name)) {
-        System.out.println("Введите new имя изменяемой задачи");
+        System.out.println("Введите новое имя изменяемой задачи");
         String newName = scanner.nextLine();
         task.setName(newName.toLowerCase());
-        System.out.println("Введите дату оканчания в формате 'yyyy.mm.dd'");
+        System.out.println("Введите дату окончания в формате 'yyyy.mm.dd'");
         String newDate = scanner.nextLine();
         String[] finaleDate = newDate.split("\\.");
         if (finaleDate.length > 1) {
