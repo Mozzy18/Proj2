@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class ToDoList {
 
   public static List<Task> allTasks;
+  public static Scanner scanner = new Scanner(System.in);
 
   public static final String ANSI_GREEN = "\u001B[32m";
   public static final String ANSI_RESET = "\u001B[0m";
@@ -18,7 +19,6 @@ public class ToDoList {
   public static void deleteTask() {
     setArrList();
     System.out.println("Введите имя задачи для удаления");
-    Scanner scanner = new Scanner(System.in);
     String name = scanner.nextLine();
     for (Task task : allTasks) {
       if (task.getName().equals(name)) {
@@ -32,13 +32,11 @@ public class ToDoList {
   public static void taskIsComplete() {
     setArrList();
     System.out.println("Введите имя задачи");
-    Scanner scanner = new Scanner(System.in);
     String name = scanner.nextLine();
     for (Task task : allTasks) {
       if(task.getName().equals(name)){
         System.out.println("Введите: 1(Завершенная) 2(В прогрессе)");
-        Scanner scanner1 = new Scanner(System.in);
-        int status = Integer.parseInt(scanner1.nextLine());
+        int status = Integer.parseInt(scanner.nextLine());
         if(status == 1)task.setComplete(true);
         else task.setComplete(false);
         addTaskToFile();
@@ -90,7 +88,6 @@ public class ToDoList {
   public static void createTask() {
     setArrList();
     System.out.println("Введите имя новой задачи");
-    Scanner scanner = new Scanner(System.in);
     String name = scanner.nextLine().toLowerCase();
     System.out.println("Введите дату оканчания в формате 'yyyy.mm.dd'");
     Scanner scanner1 = new Scanner(System.in);
@@ -123,17 +120,14 @@ public class ToDoList {
   public static void changeTask() {
     setArrList();
     System.out.println("Введите имя изменяемой задачи");
-    Scanner scanner1 = new Scanner(System.in);
-    String name = scanner1.nextLine().toLowerCase();
+    String name = scanner.nextLine().toLowerCase();
     for (Task task : allTasks) {
       if (task.getName().equals(name)) {
         System.out.println("Введите new имя изменяемой задачи");
-        Scanner scanner2 = new Scanner(System.in);
-        String newName = scanner2.nextLine();
+        String newName = scanner.nextLine();
         task.setName(newName.toLowerCase());
         System.out.println("Введите дату оканчания в формате 'yyyy.mm.dd'");
-        Scanner scanner3 = new Scanner(System.in);
-        String newDate = scanner2.nextLine();
+        String newDate = scanner.nextLine();
         String[] finaleDate = newDate.split("\\.");
         if (finaleDate.length > 1) {
           int year = Integer.parseInt(finaleDate[0]);
