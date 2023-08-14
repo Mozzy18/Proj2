@@ -28,14 +28,14 @@ public enum MenuCommand {
     System.out.println(" ═-═-═-═-═-═ Добро пожаловать в Список дел ═-═-═-═-═-═ ");
 
     System.out.println(" =====================  〚 МЕНЮ 〛 ====================\n");
-    System.out.println("1. Добавить новое задание в список");
-    System.out.println("2. Удалить задачу из списка");
-    System.out.println("3. Изменить имя задачи и дату выполнения");
-    System.out.println("4. Изменить статус задачи");
-    System.out.println("5. Посмотреть список задач");
-    System.out.println("6. Сортировать список задач по датам реализации");
-    System.out.println("7. Сортировать задачи на выполненные и нет");
-    System.out.println("0. Выход");
+    System.out.println("1. " + ADD.s);
+    System.out.println("2. " + DELETE.s);
+    System.out.println("3. " + CHANGE.s);
+    System.out.println("4. " + COMPLETE.s);
+    System.out.println("5. " + READ.s);
+    System.out.println("6. " + SORT.s);
+    System.out.println("7. " + COMPLETED.s);
+    System.out.println("0. " + EXIT.s);
   }
 
   public static MenuCommand commandList() {
@@ -108,7 +108,7 @@ public enum MenuCommand {
         }
 
       } else {
-        System.err.println("Некорректный выбор. Попробуйте снова.\n");
+        System.err.println("Некорректный выбор. Введите корректное значение.\n");
         scanner.nextLine();
       }
     }
