@@ -1,41 +1,38 @@
 import java.util.Scanner;
 
 public enum MenuCommand {
-  EXIT("Выйти из системы"),
-  ADD("Добавить новое задание в список"),
-  DELETE("Удалить задачу из списка"),
-  CHANGE("Изменить имя задачи и дату выполнения"),
-  COMPLETE("Изменить статус задачи"),
-  READ("Посмотреть список задач"),
-  SORT("Сортировать список задач по датам реализации"),
-  COMPLETED("Сортировать задачи на выполненные и нет"),
-  UNEXPECTED("");
+
+  ADD(1, "Добавить новое задание в список"),
+  DELETE(2, "Удалить задачу из списка"),
+  CHANGE(3, "Изменить имя задачи и дату выполнения"),
+  COMPLETE(4, "Изменить статус задачи"),
+  READ(5, "Посмотреть список задач"),
+  SORT(6, "Сортировать список задач по датам реализации"),
+  COMPLETED(7, "Сортировать задачи на выполненные и нет"),
+  EXIT(0, "Выйти из системы"),
+  UNEXPECTED(10, "");
 
 
+  private final int num;
   private final String s;
 
-  MenuCommand(String s) {
+  MenuCommand(int num, String s) {
+    this.num = num;
     this.s = s;
   }
 
-
-  public String getS() {
-    return s;
-  }
 
   public static void menu() {
     System.out.println();
     System.out.println(" ═-═-═-═-═-═ Добро пожаловать в Список дел ═-═-═-═-═-═ ");
 
     System.out.println(" =====================  〚 МЕНЮ 〛 ====================\n");
-    System.out.println("1. " + ADD.s);
-    System.out.println("2. " + DELETE.s);
-    System.out.println("3. " + CHANGE.s);
-    System.out.println("4. " + COMPLETE.s);
-    System.out.println("5. " + READ.s);
-    System.out.println("6. " + SORT.s);
-    System.out.println("7. " + COMPLETED.s);
-    System.out.println("0. " + EXIT.s);
+
+    for (MenuCommand command : values()) {
+      if (command != UNEXPECTED) {
+        System.out.println(command.num + ". " + command.s);
+      }
+    }
   }
 
   public static MenuCommand commandList() {

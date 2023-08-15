@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,15 +16,18 @@ public class ToDoList {
 
   public static final String ANSI_GREEN = "\u001B[32m";
   public static final String ANSI_RESET = "\u001B[0m";
-//  public static final String ANSI_GREEN = "\u001B[32m";
+
 
   public static void deleteTask() {
     setArrList();
     System.out.println("Введите имя задачи для удаления");
     String name = scanner.nextLine();
-    for (Task task : allTasks) {
+
+    Iterator<Task> iterator = allTasks.iterator();
+    while (iterator.hasNext()) {
+      Task task = iterator.next();
       if (task.getName().equals(name)) {
-        allTasks.remove(task);
+        iterator.remove();
         System.out.println(task);
         addTaskToFile();
       }
@@ -35,9 +39,10 @@ public class ToDoList {
     Collections.sort(allTasks);
     for (Task task : allTasks) {
       if (Boolean.valueOf(task.isComplete())) {
-        System.out.println(ANSI_GREEN + task.getName() + " до " + task.getFinalDate() + ANSI_RESET);
+        System.out.println(
+            ANSI_GREEN + task.getName() + ". Выполнить до: " + task.getFinalDate() + ANSI_RESET);
       } else {
-        System.out.println(task.getName() + " до " + task.getFinalDate());
+        System.out.println(task.getName() + ". Выполнить до: " + task.getFinalDate());
       }
     }
   }
