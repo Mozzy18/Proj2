@@ -49,8 +49,6 @@ public class TaskTests {
     assertEquals("New Task Name", task.getName());
   }
 
-  // In reality, you may want to guard against setting a null name or a name that's just whitespace
-  // Similar to the constructor checks. This is just a basic test.
 
   @Test
   void setFinalDate_ValidInput_ChangesDate() {
