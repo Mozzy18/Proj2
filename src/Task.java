@@ -8,16 +8,19 @@ public class Task implements Comparable<Task> {
   private boolean complete;
 
   public Task(String name, LocalDate finalDate, Boolean complete) {
-   if (name == null || name.isEmpty()) {
-     throw new IllegalArgumentException("NO CORRECT" + name);
-   }
-   if (finalDate == null || finalDate.isBefore(LocalDate.now())) {
-     throw new IllegalArgumentException("NO CORRECT");
-   }
+    if (name == null || name.isEmpty()) {
+      throw new IllegalArgumentException("NO CORRECT" + name);
+    }
+    if (finalDate == null || finalDate.isBefore(LocalDate.now())) {
+      throw new IllegalArgumentException("NO CORRECT");
+    }
     this.name = name;
     this.finalDate = finalDate;
     this.createdDate = LocalDate.now();
     this.complete = complete;
+  }
+
+  public Task(String test, LocalDate date) {
   }
 
   public String getName() {
@@ -57,13 +60,5 @@ public class Task implements Comparable<Task> {
   @Override
   public int compareTo(Task other) {
     return finalDate.compareTo(other.finalDate);
-   //int status = Integer.parseInt(ToDoList.scanner.nextLine());
-   //if (status == 1) {
-   //  return finalDate.compareTo(other.finalDate);
-   //} else if (status == 2) {
-   //  return name.compareTo(other.name);
-   //} else {
-   //  return 0;
-   //}
   }
 }

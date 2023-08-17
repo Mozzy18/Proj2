@@ -19,7 +19,7 @@ public class ToDoList {
 
 
   public static void deleteTask() {
-    setArrList();
+    setArrList(scanner);
     System.out.println("Введите имя задачи для удаления");
     String name = scanner.nextLine();
 
@@ -35,7 +35,7 @@ public class ToDoList {
   }
 
   public static void sortTask() {
-    setArrList();
+    setArrList(scanner);
     Collections.sort(allTasks);
     for (Task task : allTasks) {
       if (Boolean.valueOf(task.isComplete())) {
@@ -48,7 +48,7 @@ public class ToDoList {
   }
 
   public static void listFinalTask() {
-    setArrList();
+    setArrList(scanner);
 
     List<Task> finalAllTasks = new ArrayList<>();
     List<Task> noFinalAllTask = new ArrayList<>();
@@ -71,7 +71,7 @@ public class ToDoList {
   }
 
   public static void taskIsComplete() {
-    setArrList();
+    setArrList(scanner);
     System.out.println("Введите имя задачи");
     String name = scanner.nextLine();
     for (Task task : allTasks) {
@@ -101,10 +101,10 @@ public class ToDoList {
     }
   }
 
-  public static List<Task> setArrList() {
+  public static List<Task> setArrList(Scanner scanner) {
     allTasks = new ArrayList<>();
     File inputFile = new File("res/list.csv");
-    Scanner scanner;
+
     try {
       scanner = new Scanner(inputFile);
       while (scanner.hasNextLine()) {
@@ -130,7 +130,7 @@ public class ToDoList {
   }
 
   public static void createTask() {
-    setArrList();
+    setArrList(scanner);
     System.out.println("Введите имя новой задачи");
     String name = scanner.nextLine().toLowerCase();
     if (name.isEmpty()) {
@@ -163,8 +163,8 @@ public class ToDoList {
 
 
   public static void readTaskFromFile() {
-    setArrList();
-    allTasks = setArrList();
+    setArrList(scanner);
+    allTasks = setArrList(scanner);
     for (Task task : allTasks) {
       if (Boolean.valueOf(task.isComplete())) {
         System.out.println(ANSI_GREEN + task.getName() + " до " + task.getFinalDate() + ANSI_RESET);
@@ -176,7 +176,7 @@ public class ToDoList {
   }
 
   public static void changeTask() {
-    setArrList();
+    setArrList(scanner);
     System.out.println("Введите имя изменяемой задачи");
     String name = scanner.nextLine().toLowerCase();
     for (Task task : allTasks) {
